@@ -1,0 +1,9 @@
+{
+  "action": "decision",
+  "actor": "ACTUAL_CTO_THREAD_ID",
+  "question": "Which implementation option fits this milestone?",
+  "choice": "Describe the selected option.",
+  "reason": "Explain fit, cost, maintenance, and reversibility based on actual evidence.",
+  "alternatives": ["Describe a suitable alternative and its tradeoff."],
+  "sources": [{"url": "PRIMARY_SOURCE_URL", "checked_on": "YYYY-MM-DD", "supports": "Specific verified fact"}]
+}

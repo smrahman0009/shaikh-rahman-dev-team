@@ -1,0 +1,15 @@
+{
+  "action": "review",
+  "actor": "ACTUAL_CRITIC_THREAD_ID",
+  "id": "T1",
+  "token": "TOKEN_FROM_REVIEW_START",
+  "verdict": "revise",
+  "summary": "The implementation does not meet the empty-input requirement.",
+  "findings": [{
+    "id": "F1",
+    "severity": "major",
+    "evidence": "average([]) raises ZeroDivisionError in the independent check.",
+    "impact": "Callers cannot use the agreed empty-input behavior.",
+    "verification": "Assert average([]) is None; rerun nonempty cases."
+  }]
+}

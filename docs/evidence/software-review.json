@@ -1,0 +1,199 @@
+{
+  "date": "2026-11-02",
+  "kind": "real native subagent demonstration",
+  "context_setup": "Critics spawned by parent with fork_turns=none and neutral packet; host orchestration observed by parent, not independently authenticated by ledger.",
+  "project_status": "delivered",
+  "agent_claims": 8,
+  "verification_checks": 8,
+  "reported_cost_usd": null,
+  "tasks": {
+    "average": {
+      "status": "accepted",
+      "acceptance": [
+        "Empty input returns None.",
+        "Every nonempty value contributes to the mean.",
+        "Empty, singleton, mixed-sign and decimal cases are verified."
+      ],
+      "producers": [
+        "/root",
+        "/root/live_developer"
+      ],
+      "rounds": 1,
+      "artifacts": {
+        "average.py": "4b6416b5f42561a3caf435ac76c79ceb73bedbe0bfe12026a09e1ce818b43f94",
+        "test_average.py": "7a56cfe5c1b12c68d2b816c2d95530c581fa3b3b044ce846bf8698e9e57bad5c"
+      },
+      "reviews": [
+        {
+          "action": "review",
+          "actor": "/root/live_code_critic",
+          "id": "average",
+          "verdict": "revise",
+          "summary": "Independent verification reproduces empty-input failure and identifies missing required regression cases. Three nonempty cases pass.",
+          "findings": [
+            {
+              "id": "AVG-1",
+              "severity": "major",
+              "evidence": "average.py:2 divides by len(values) without an empty-input guard. Independent ledger check test_empty reproduced ZeroDivisionError for average([]).",
+              "impact": "Violates explicit empty-input contract requiring None; empty collections crash callers.",
+              "verification": "Ledger command check ran four independent cases; empty failed, singleton, mixed-sign and decimal passed. Add empty handling and rerun all four."
+            },
+            {
+              "id": "AVG-2",
+              "severity": "major",
+              "evidence": "test_average.py:4-5 contains only test_simple for [2,4]. No empty, singleton, mixed-sign or decimal regression cases are present.",
+              "impact": "Required verification coverage is absent, allowing the empty-input defect to go undetected by the supplied suite.",
+              "verification": "Inspection of all five lines of test_average.py; add and run the four explicitly required cases."
+            }
+          ],
+          "hashes": {
+            "average.py": "2a6f38d7b42568c18e8a5ac3d0a02acc9acfc7f7f50f6c6760d14dd993ed4822",
+            "test_average.py": "5684e3fafe32a21f44e7aedbd66c06921fddd1a6f39ea1e3f104f59bbe9e15e0"
+          },
+          "time": "2026-11-02T04:23:02.110388+00:00"
+        },
+        {
+          "action": "review",
+          "actor": "/root/live_code_critic",
+          "id": "average",
+          "verdict": "approve",
+          "summary": "AVG-1 and AVG-2 resolved in current artifact version: empty inputs return None; all values contribute via sum divided by length; required regression cases are present. Independent four-case verification and delivered five-test suite both pass via ledger checks. Review scope is the stated numeric collection contract.",
+          "findings": [],
+          "hashes": {
+            "average.py": "4b6416b5f42561a3caf435ac76c79ceb73bedbe0bfe12026a09e1ce818b43f94",
+            "test_average.py": "7a56cfe5c1b12c68d2b816c2d95530c581fa3b3b044ce846bf8698e9e57bad5c"
+          },
+          "time": "2026-11-02T04:25:10.244690+00:00"
+        }
+      ],
+      "current_checks": [
+        {
+          "kind": "command",
+          "argv": [
+            "python",
+            "-B",
+            "-c",
+            "import unittest\nfrom average import average\nclass IndependentAverageTests(unittest.TestCase):\n def test_empty(self): self.assertIsNone(average([]))\n def test_singleton(self): self.assertEqual(average([7]),7)\n def test_mixed_sign(self): self.assertEqual(average([-5,2,9]),2)\n def test_decimal(self): self.assertAlmostEqual(average([0.1,0.2,0.6]),0.3)\nunittest.main()"
+          ],
+          "exit_code": 0,
+          "output": "....\r\n----------------------------------------------------------------------\r\nRan 4 tests in 0.000s\r\n\r\nOK\r\n",
+          "hashes": {
+            "average.py": "4b6416b5f42561a3caf435ac76c79ceb73bedbe0bfe12026a09e1ce818b43f94",
+            "test_average.py": "7a56cfe5c1b12c68d2b816c2d95530c581fa3b3b044ce846bf8698e9e57bad5c"
+          },
+          "passed": true,
+          "actor": "/root/live_code_critic",
+          "time": "2026-11-02T04:25:02.668884+00:00"
+        },
+        {
+          "kind": "command",
+          "argv": [
+            "python",
+            "-B",
+            "-m",
+            "unittest",
+            "discover",
+            "-v"
+          ],
+          "exit_code": 0,
+          "output": "test_decimal (test_average.AverageTests.test_decimal) ... ok\r\ntest_empty (test_average.AverageTests.test_empty) ... ok\r\ntest_mixed_sign (test_average.AverageTests.test_mixed_sign) ... ok\r\ntest_simple (test_average.AverageTests.test_simple) ... ok\r\ntest_singleton (test_average.AverageTests.test_singleton) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 5 tests in 0.000s\r\n\r\nOK\r\n",
+          "hashes": {
+            "average.py": "4b6416b5f42561a3caf435ac76c79ceb73bedbe0bfe12026a09e1ce818b43f94",
+            "test_average.py": "7a56cfe5c1b12c68d2b816c2d95530c581fa3b3b044ce846bf8698e9e57bad5c"
+          },
+          "passed": true,
+          "actor": "/root/live_code_critic",
+          "time": "2026-11-02T04:25:04.221307+00:00"
+        }
+      ]
+    },
+    "validation": {
+      "status": "accepted",
+      "acceptance": [
+        "The required helper behavior is verified.",
+        "Handoff accurately states results and gives a reproducible command."
+      ],
+      "producers": [
+        "/root"
+      ],
+      "rounds": 1,
+      "artifacts": {
+        "handoff.md": "cf0d2741aacdb74dcaa024a09c21e18eee1af9fb10252f08740ac6a98e465762"
+      },
+      "reviews": [
+        {
+          "action": "review",
+          "actor": "/root/live_validation",
+          "id": "validation",
+          "verdict": "revise",
+          "summary": "Artifact behavior and handoff command verified successfully; verification cycle needs recovery because critic introduced a malformed supplementary command before a successful corrected rerun. No producer artifact defect found.",
+          "findings": [
+            {
+              "id": "VALIDATION-EVIDENCE-1",
+              "severity": "minor",
+              "evidence": "The exact documented unittest command passed all five tests. Corrected independent checks passed empty, singleton, mixed-sign, decimal and all permutations of [1,3,8]. An earlier critic-authored supplementary command failed with SyntaxError from shell quoting, not from the implementation.",
+              "impact": "Ledger approval requires all recorded checks in the current submission to pass, so this critic-created failed check prevents approval despite passing artifact checks.",
+              "verification": "Reclaim and resubmit the unchanged handoff to start a clean evidence cycle; execute the existing validation-check.json and corrected validation-independent-check.json through Ledger.check and approve if both pass. No artifact modification is required."
+            }
+          ],
+          "hashes": {
+            "handoff.md": "cf0d2741aacdb74dcaa024a09c21e18eee1af9fb10252f08740ac6a98e465762"
+          },
+          "time": "2026-11-02T04:26:57.750121+00:00"
+        },
+        {
+          "action": "review",
+          "actor": "/root/live_validation",
+          "id": "validation",
+          "verdict": "approve",
+          "summary": "Current handoff and dependent implementation satisfy acceptance criteria. Exact documented command passed five tests through Ledger.check; separate independent assertions passed empty, singleton, mixed-sign, decimal and all permutations of [1,3,8]. After independent assessment, prior critic review/check records corroborated the handoff repair narrative and independent review claims against current hashes. VALIDATION-EVIDENCE-1 is resolved by clean resubmission and both passing commands; the earlier critic quoting error remains in prior-cycle records. Scope is finite numeric lists; billing unavailable and not independently verified. No artifacts changed by critic.",
+          "findings": [],
+          "hashes": {
+            "handoff.md": "cf0d2741aacdb74dcaa024a09c21e18eee1af9fb10252f08740ac6a98e465762"
+          },
+          "time": "2026-11-02T04:28:01.326532+00:00"
+        }
+      ],
+      "current_checks": [
+        {
+          "kind": "command",
+          "argv": [
+            "python",
+            "-B",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            ".",
+            "-v"
+          ],
+          "exit_code": 0,
+          "output": "test_decimal (test_average.AverageTests.test_decimal) ... ok\r\ntest_empty (test_average.AverageTests.test_empty) ... ok\r\ntest_mixed_sign (test_average.AverageTests.test_mixed_sign) ... ok\r\ntest_simple (test_average.AverageTests.test_simple) ... ok\r\ntest_singleton (test_average.AverageTests.test_singleton) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 5 tests in 0.000s\r\n\r\nOK\r\n",
+          "hashes": {
+            "handoff.md": "cf0d2741aacdb74dcaa024a09c21e18eee1af9fb10252f08740ac6a98e465762"
+          },
+          "passed": true,
+          "actor": "/root/live_validation",
+          "time": "2026-11-02T04:27:44.223392+00:00"
+        },
+        {
+          "kind": "command",
+          "argv": [
+            "python",
+            "-B",
+            "-c",
+            "from average import average; from math import isclose; from itertools import permutations; assert average([]) is None; assert average([7]) == 7; assert average([-5,2,9]) == 2; assert isclose(average([0.1,0.2,0.6]), 0.3); assert all(average(list(p)) == 4 for p in permutations([1,3,8])); print(True)"
+          ],
+          "exit_code": 0,
+          "output": "True\r\n",
+          "hashes": {
+            "handoff.md": "cf0d2741aacdb74dcaa024a09c21e18eee1af9fb10252f08740ac6a98e465762"
+          },
+          "passed": true,
+          "actor": "/root/live_validation",
+          "time": "2026-11-02T04:27:45.081758+00:00"
+        }
+      ]
+    }
+  }
+}

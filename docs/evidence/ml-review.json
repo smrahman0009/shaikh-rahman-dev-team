@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-02",
+  "kind": "real native subagent demonstration",
+  "context_setup": "Critics spawned by parent with fork_turns=none and neutral packet; host orchestration observed by parent, not independently authenticated by ledger.",
+  "project_status": "active",
+  "agent_claims": 2,
+  "verification_checks": 2,
+  "reported_cost_usd": null,
+  "tasks": {
+    "evaluation": {
+      "status": "needs_revision",
+      "acceptance": [
+        "Evaluation represents animals unseen during training.",
+        "A simple baseline and reproducible results are provided."
+      ],
+      "producers": [
+        "/root"
+      ],
+      "rounds": 0,
+      "artifacts": {
+        "evaluation.py": "b42086a78746ae142b5f6cf4bb3f37213347ec190b4a124bda5c570d3c6e2dca"
+      },
+      "reviews": [
+        {
+          "action": "review",
+          "actor": "/root/live_ml_critic",
+          "id": "evaluation",
+          "verdict": "revise",
+          "summary": "Independent artifact inspection and two executable checks: deterministic output passes, unseen-animal acceptance fails. No producer rationale, histories, ledger tests or other demos read.",
+          "findings": [
+            {
+              "id": "ML-001",
+              "severity": "blocking",
+              "evidence": "evaluation.py lines 1-5 split repeated visits by row. Ledger.check observed identical train/test animal sets [animal-a, animal-b], reported accuracy 1.0, and failed disjointness assertion (exit 1).",
+              "impact": "Every evaluated animal was seen in training; the dictionary retrieves its prior target. Accuracy does not establish prediction on unseen animals.",
+              "verification": "Partition by animal identity and rerun an explicit train/test ID-disjointness assertion and evaluation on held-out animals."
+            },
+            {
+              "id": "ML-002",
+              "severity": "major",
+              "evidence": "evaluation.py lines 4-7 implement and print only identity-lookup accuracy. No separate simple baseline is provided. Independent check computed a training-majority constant baseline accuracy of 0.5 on the current test rows.",
+              "impact": "The requested baseline comparison is absent; the reported 1.0 cannot establish added predictive value.",
+              "verification": "Provide and report a simple baseline fitted exclusively on training labels, scored on the same corrected held-out animals as the candidate. Repeat execution to confirm reproducible results."
+            }
+          ],
+          "hashes": {
+            "evaluation.py": "b42086a78746ae142b5f6cf4bb3f37213347ec190b4a124bda5c570d3c6e2dca"
+          },
+          "time": "2026-11-02T04:23:13.444615+00:00"
+        }
+      ],
+      "current_checks": [
+        {
+          "kind": "command",
+          "argv": [
+            "python",
+            "-B",
+            "-c",
+            "import runpy,json; d=runpy.run_path('evaluation.py'); train_ids={r[0] for r in d['train']}; test_ids={r[0] for r in d['test']}; overlap=sorted(train_ids & test_ids); majority=max(sorted({r[1] for r in d['train']}),key=lambda v:sum(r[1]==v for r in d['train'])); baseline=sum(r[1]==majority for r in d['test'])/len(d['test']); print(json.dumps({'train_animals':sorted(train_ids),'test_animals':sorted(test_ids),'overlap':overlap,'reported_accuracy':d['accuracy'],'independent_majority_baseline':baseline})); assert not overlap, 'Evaluation leaks repeated animals across train/test'"
+          ],
+          "exit_code": 1,
+          "output": "{'accuracy': 1.0}\r\n{\"train_animals\": [\"animal-a\", \"animal-b\"], \"test_animals\": [\"animal-a\", \"animal-b\"], \"overlap\": [\"animal-a\", \"animal-b\"], \"reported_accuracy\": 1.0, \"independent_majority_baseline\": 0.5}\r\nTraceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\n    import runpy,json; d=runpy.run_path('evaluation.py'); train_ids={r[0] for r in d['train']}; test_ids={r[0] for r in d['test']}; overlap=sorted(train_ids & test_ids); majority=max(sorted({r[1] for r in d['train']}),key=lambda v:sum(r[1]==v for r in d['train'])); baseline=sum(r[1]==majority for r in d['test'])/len(d['test']); print(json.dumps({'train_animals':sorted(train_ids),'test_animals':sorted(test_ids),'overlap':overlap,'reported_accuracy':d['accuracy'],'independent_majority_baseline':baseline})); assert not overlap, 'Evaluation leaks repeated animals across train/test'\r\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^^^^^^^^^^^\r\nAssertionError: Evaluation leaks repeated animals across train/test\r\n",
+          "hashes": {
+            "evaluation.py": "b42086a78746ae142b5f6cf4bb3f37213347ec190b4a124bda5c570d3c6e2dca"
+          },
+          "passed": false,
+          "actor": "/root/live_ml_critic",
+          "time": "2026-11-02T04:22:55.742692+00:00"
+        },
+        {
+          "kind": "command",
+          "argv": [
+            "python",
+            "-B",
+            "-c",
+            "import subprocess; a=subprocess.check_output(['python','-B','evaluation.py'],text=True); b=subprocess.check_output(['python','-B','evaluation.py'],text=True); print('run1:',a.strip()); print('run2:',b.strip()); assert a==b"
+          ],
+          "exit_code": 0,
+          "output": "run1: {'accuracy': 1.0}\r\nrun2: {'accuracy': 1.0}\r\n",
+          "hashes": {
+            "evaluation.py": "b42086a78746ae142b5f6cf4bb3f37213347ec190b4a124bda5c570d3c6e2dca"
+          },
+          "passed": true,
+          "actor": "/root/live_ml_critic",
+          "time": "2026-11-02T04:23:01.207118+00:00"
+        }
+      ]
+    }
+  }
+}

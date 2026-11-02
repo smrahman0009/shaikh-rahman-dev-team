@@ -1,0 +1,14 @@
+{
+  "action": "task",
+  "actor": "ACTUAL_CTO_THREAD_ID",
+  "id": "T1",
+  "purpose": "Make average calculations handle empty input correctly.",
+  "approach": "Inspect existing behavior, implement the agreed empty-input result, then verify boundary cases.",
+  "owner_role": "startup_developer",
+  "critic_role": "startup_code_critic",
+  "profile": "software",
+  "stage": "implementation",
+  "acceptance": ["Empty input returns None.", "Nonempty input includes every value."],
+  "files": ["average.py", "test_average.py"],
+  "depends_on": []
+}

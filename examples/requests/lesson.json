@@ -1,0 +1,12 @@
+{
+  "action": "lesson_propose",
+  "actor": "ACTUAL_AUTHOR_THREAD_ID",
+  "id": "group-split-1",
+  "scope": "specialist",
+  "problem": "Repeated subjects occurred in training and evaluation partitions.",
+  "cause": "Splitting rows ignored the deployment unit of generalization.",
+  "correction": "Split by subject when evaluating previously unseen subjects.",
+  "applicability": "ML evaluation with repeated observations per entity and unseen-entity deployment.",
+  "evidence": "Record a real reviewed experiment or finding here before proposing this example.",
+  "prevention": "Assert disjoint subject IDs and document the intended deployment population."
+}

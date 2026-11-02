@@ -1,0 +1,4 @@
+interface:
+  display_name: "Startup Team"
+  short_description: "Deliver projects with specialists and independent review"
+  default_prompt: "Use $startup-team to read business_requirement.md and coordinate a reviewed delivery for this project."

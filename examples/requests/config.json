@@ -1,0 +1,7 @@
+{
+  "mode": "autonomous",
+  "max_active": 2,
+  "max_claims": 40,
+  "max_revisions": 2,
+  "deadline_seconds": 14400
+}
