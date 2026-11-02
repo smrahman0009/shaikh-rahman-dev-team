@@ -18,7 +18,7 @@ def plan_install(target):
         rel = path.relative_to(source)
         if any(p in {"__pycache__", ".startup-team", ".git", ".runtime"} for p in rel.parts):
             continue
-        destinations = [target / "tools" / "startup-team" / rel]
+        destinations = [target / "tools" / "sr-dev-team" / rel]
         if rel.parts[0] in {".agents", ".codex"}:
             destinations.append(target / rel)
         for dest in destinations:
@@ -52,7 +52,7 @@ def main():
             # Exclusive creation refuses a file that appeared after preflight.
             with source.open("rb") as src, dest.open("xb") as out:
                 shutil.copyfileobj(src, out)
-        print(f"Installed {len(pairs)} files. Open a fresh Codex chat and select $startup-team.")
+        print(f"Installed {len(pairs)} files. Open a fresh Codex chat and select $sr-dev-team.")
         return 0
     except (ValueError, OSError) as error:
         print(f"Installation stopped: {error}")

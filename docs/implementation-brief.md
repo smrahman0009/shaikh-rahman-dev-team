@@ -4,7 +4,7 @@
 
 Build a reusable, evidence-led engineering team for application development, data engineering, analytics, and ML. The user acts as CEO; a CTO is the primary contact and selects the smallest useful set of specialists. Optimize accepted results and total effort, including repair and review. Do not assume that more agents improve outcomes.
 
-Keep the framework under `tools/startup-team`, with only documented native integration files outside it. Preserve this repository's Next application and unrelated work. The original request is preserved byte-for-byte in [prompt-original.md](prompt-original.md); this brief operationalizes it and does not replace project business intent.
+Keep the framework under `tools/sr-dev-team`, with only documented native integration files outside it. Preserve this repository's Next application and unrelated work. The original request is preserved byte-for-byte in [prompt-original.md](prompt-original.md); this brief operationalizes it and does not replace project business intent.
 
 Use native Codex skills and supported agent configuration after checking official documentation and the installed environment. Implement durable bookkeeping and validation with Python's standard library when available. Provide setup instructions if prerequisites are absent; do not install runtimes automatically, assume API credentials, or introduce a paid service. A supported skill entry point must be real and discoverable; document how a fresh session loads it. Do not invent native commands.
 

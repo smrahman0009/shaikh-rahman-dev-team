@@ -10,7 +10,7 @@ import unittest
 from concurrent.futures import ThreadPoolExecutor
 
 
-SPEC = importlib.util.spec_from_file_location("startup_team", Path(__file__).resolve().parents[1] / "team.py")
+SPEC = importlib.util.spec_from_file_location("sr_team", Path(__file__).resolve().parents[1] / "team.py")
 team = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(team)
 

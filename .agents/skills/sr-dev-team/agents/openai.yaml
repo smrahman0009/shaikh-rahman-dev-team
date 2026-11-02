@@ -1,0 +1,4 @@
+interface:
+  display_name: "SR Dev Team"
+  short_description: "Deliver projects with specialists and independent review"
+  default_prompt: "Use $sr-dev-team to read business_requirement.md and coordinate a reviewed delivery for this project."

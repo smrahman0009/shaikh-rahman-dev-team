@@ -1,4 +1,4 @@
-# Shaikh Rahman Dev Team
+# SR Dev Team
 
 A portfolio project by **Shaikh Rahman**, software developer and data scientist.
 
@@ -14,7 +14,7 @@ A reusable agentic delivery toolkit for software, data engineering, analytics an
 
 For software engineering or data science opportunities, connect through [my GitHub profile](https://github.com/smrahman0009).
 
-The repository is named `shaikh-rahman-dev-team`; the installed Codex skill is invoked as `$startup-team`.
+Invoke **SR Dev Team** with `$sr-dev-team`.
 
 A reusable Codex workflow: CEO intent → CTO routing → appropriately scoped specialists → independent critics → verified delivery. Supports application, data engineering, analytics and ML work.
 
@@ -22,16 +22,18 @@ The original [implementation prompt](docs/prompt-original.md), [expert critique]
 
 New to Codex skills? Read [skills explained in plain language](docs/skills-explained.md).
 
+Previously installed `$startup-team`? See the [name migration note](docs/name-migration.md).
+
 ## Start in VS Code
 
 Requirements: Python **3.11+**, a signed-in Codex client supporting skills and native subagents, and normal project execution permissions. The toolkit itself uses only Python's standard library; no API key or paid dependency is required by its scripts. Agent work consumes your existing Codex allowance.
 
 1. Run the installer below to expose the skill in the target repository, or open this toolkit directory as your workspace.
-2. Start a fresh Codex chat if the skill/agents do not appear. Type `$` and select `startup-team` (or use `/skills` when available).
+2. Start a fresh Codex chat if the skill/agents do not appear. Type `$` and select `sr-dev-team` (or use `/skills` when available).
 3. Provide your business requirements and target project. Invoke:
 
 ```text
-$startup-team
+$sr-dev-team
 Use this repository as the target project. Read business_requirement.md.
 Use autonomous delivery mode. Start with the smallest useful milestone.
 Use independent critics and explain tasks in plain language.
@@ -45,7 +47,7 @@ To install into an existing repository:
 python install.py --target PATH_TO_YOUR_PROJECT
 ```
 
-Installation copies the portable toolkit to `tools/startup-team` and registers its skill under `.agents/skills/startup-team` and its prefixed roles under `.codex/agents`. It never overwrites differing files. A preflight lists conflicts before writing anything; `--check` reports the plan only. Your Codex environment may require permission for these configuration directories. No global settings are changed.
+Installation copies the portable toolkit to `tools/sr-dev-team` and registers its skill under `.agents/skills/sr-dev-team` and its prefixed roles under `.codex/agents`. It never overwrites differing files. A preflight lists conflicts before writing anything; `--check` reports the plan only. Your Codex environment may require permission for these configuration directories. No global settings are changed.
 
 ## Talk to the CTO
 
@@ -70,7 +72,7 @@ Initialization copies brief bytes exactly and refuses to overwrite a different e
 
 `status` is deliberately compact to reduce repeated context. Use `status --full` only for detailed audit; do not send it to a critic before its initial independent assessment.
 
-See [request examples](examples/requests/) and the skill's [ledger reference](.agents/skills/startup-team/references/ledger.md). Requests are JSON files, avoiding shell quoting of prompts, scripts or dollar signs. Agent `actor` values should be actual host thread IDs. Tokens and hashes reject stale assignments; caller identity is not cryptographically authenticated.
+See [request examples](examples/requests/) and the skill's [ledger reference](.agents/skills/sr-dev-team/references/ledger.md). Requests are JSON files, avoiding shell quoting of prompts, scripts or dollar signs. Agent `actor` values should be actual host thread IDs. Tokens and hashes reject stale assignments; caller identity is not cryptographically authenticated.
 
 Typical sequence: `task → claim → submit → review_start → check/inspection → review → deliver`. Each claim returns its token. Use a fresh-context critic, who obtains the neutral packet returned by `review_start`. The packet omits the producer's approach, summary and previous discussion. The critic may read original requirements and artifacts; logs and producer rationale stay out of its initial input.
 

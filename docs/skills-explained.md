@@ -4,21 +4,21 @@ A **skill** is a reusable working procedure that Codex can read when a task need
 
 **Skill Creator** is a built-in assistant for creating or improving these folders. It helps write the skill; you do not need to run Skill Creator every time you use the finished skill.
 
-For this project, Skill Creator guidance helped build `startup-team`. You run the finished workflow by mentioning `$startup-team` in a Codex chat.
+For this project, Skill Creator guidance helped build `sr-dev-team`. You run the finished workflow by mentioning `$sr-dev-team` in a Codex chat.
 
 ## What the files mean
 
 ```text
-.agents/skills/startup-team/
+.agents/skills/sr-dev-team/
   SKILL.md                 When to use the workflow and how to coordinate it
   references/              Detailed rules loaded when needed
   agents/openai.yaml       Display name and suggested invocation in the UI
 
 .codex/agents/
-  startup_cto.toml          CTO role instructions
-  startup_developer.toml    Software developer role instructions
-  startup_ml_engineer.toml  ML specialist role instructions
-  startup_*_critic.toml     Independent review role instructions
+  sr_cto.toml          CTO role instructions
+  sr_developer.toml    Software developer role instructions
+  sr_ml_engineer.toml  ML specialist role instructions
+  sr_*_critic.toml     Independent review role instructions
 
 team.py                    Durable task, review, budget and knowledge ledger
 ```
@@ -31,7 +31,7 @@ Every skill needs a `SKILL.md` file. Its first section names the skill and descr
 
 ```yaml
 ---
-name: startup-team
+name: sr-dev-team
 description: Coordinate specialist agents to deliver reviewed project work.
 ---
 ```
@@ -40,7 +40,7 @@ Below that section are the instructions Codex follows. Additional files are incl
 
 ## What happens when you use this one
 
-1. You write your project intent in `business_requirement.md` and invoke `$startup-team`.
+1. You write your project intent in `business_requirement.md` and invoke `$sr-dev-team`.
 2. Codex reads the skill and acts as your CTO.
 3. The CTO selects suitable specialists and creates bounded tasks.
 4. Native subagents do the work and independently critique it.
@@ -56,7 +56,7 @@ Skills load progressively: Codex first sees the name and description, then reads
 Open the project in VS Code and start a Codex chat:
 
 ```text
-$startup-team
+$sr-dev-team
 Read business_requirement.md.
 Use autonomous delivery mode.
 Start with the smallest useful milestone.

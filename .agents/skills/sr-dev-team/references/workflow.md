@@ -16,12 +16,12 @@ For pause or stop, prevent further dispatch, signal/interrupt live agents using 
 
 | Stage | Responsible role | Critic | Exit evidence |
 |---|---|---|---|
-| Intake and requirements | startup_product | startup_requirements_critic | Scope, source-linked requirements, assumptions, observable acceptance criteria |
-| Architecture | startup_architect | startup_design_critic | Interfaces, data flow, tradeoffs, failure behavior, verification approach |
-| Task planning | startup_architect | startup_plan_critic | Bounded tasks, dependencies, ownership, criteria and checks |
-| Implementation | startup_developer / startup_data_engineer / startup_ml_engineer | startup_code_critic / startup_data_critic / startup_ml_critic | Artifacts, relevant checks, resolved material findings |
-| Integrated validation | startup_qa | startup_validation_critic | Current acceptance evidence, reproduction instructions, limitations |
-| Consequential CTO decision / delivery | startup_cto | startup_auditor | Evidence supports decisions and delivery claims |
+| Intake and requirements | sr_product | sr_requirements_critic | Scope, source-linked requirements, assumptions, observable acceptance criteria |
+| Architecture | sr_architect | sr_design_critic | Interfaces, data flow, tradeoffs, failure behavior, verification approach |
+| Task planning | sr_architect | sr_plan_critic | Bounded tasks, dependencies, ownership, criteria and checks |
+| Implementation | sr_developer / sr_data_engineer / sr_ml_engineer | sr_code_critic / sr_data_critic / sr_ml_critic | Artifacts, relevant checks, resolved material findings |
+| Integrated validation | sr_qa | sr_validation_critic | Current acceptance evidence, reproduction instructions, limitations |
+| Consequential CTO decision / delivery | sr_cto | sr_auditor | Evidence supports decisions and delivery claims |
 
 Combine stages for small changes. Do not skip independent review of substantive output. Do not require ceremonial documents for trivial tasks. Parallelize independent work; assign disjoint file ownership or separate worktrees. Shared-file integration belongs to a named owner.
 

@@ -50,10 +50,10 @@ class InstallTests(unittest.TestCase):
         self.assertEqual(0, self.run_install()[0])
         installed = self.snapshot(self.target)
         for name, content in before.items():
-            self.assertEqual(content, installed["tools/startup-team/" + name])
+            self.assertEqual(content, installed["tools/sr-dev-team/" + name])
             if name.startswith((".agents/", ".codex/")):
                 self.assertEqual(content, installed[name])
-        expected = {"tools/startup-team/" + name for name in before}
+        expected = {"tools/sr-dev-team/" + name for name in before}
         expected.update(name for name in before if name.startswith((".agents/", ".codex/")))
         self.assertEqual(expected, set(installed))
         self.assertEqual([], self.installer.plan_install(self.target))
@@ -66,7 +66,7 @@ class InstallTests(unittest.TestCase):
     def test_preflight_writes_nothing_and_conflict_never_partially_installs(self):
         self.assertEqual(0, self.run_install(check=True)[0])
         self.assertEqual([], list(self.target.iterdir()))
-        conflict = self.target / ".agents/skills/startup-team/SKILL.md"
+        conflict = self.target / ".agents/skills/sr-dev-team/SKILL.md"
         conflict.parent.mkdir(parents=True)
         conflict.write_text("User custom skill; preserve it", encoding="utf-8")
         before = self.snapshot(self.target)
@@ -103,7 +103,7 @@ class InstallTests(unittest.TestCase):
 
     def test_installed_skill_references_and_all_generated_roles_validate(self):
         self.assertEqual(0, self.run_install()[0])
-        portable = self.target / "tools/startup-team"
+        portable = self.target / "tools/sr-dev-team"
         with redirect_stdout(io.StringIO()):
             self.validator.validate(portable)
         source_roles = {p.name for p in (self.source / ".codex/agents").glob("*.toml")}
@@ -116,12 +116,12 @@ class InstallTests(unittest.TestCase):
                 self.assertEqual(path.stem, role["name"])
                 for field in ("description", "developer_instructions"):
                     self.assertTrue(role[field].strip())
-        skill = self.target / ".agents/skills/startup-team"
+        skill = self.target / ".agents/skills/sr-dev-team"
         self.assertTrue((skill / "SKILL.md").is_file())
         self.assertTrue((skill / "agents/openai.yaml").is_file())
 
     def test_validator_detects_broken_skill_reference(self):
-        skill = self.source / ".agents/skills/startup-team/SKILL.md"
+        skill = self.source / ".agents/skills/sr-dev-team/SKILL.md"
         with skill.open("a", encoding="utf-8") as out:
             out.write("\n[Missing reference](references/does-not-exist.md)\n")
         with self.assertRaisesRegex(AssertionError, "Broken link"):
@@ -129,7 +129,7 @@ class InstallTests(unittest.TestCase):
 
     def test_validator_detects_missing_role_instructions(self):
         role = next((self.source / ".codex/agents").glob("*.toml"))
-        role.write_text('name = "startup_invalid"\ndescription = "Missing required instructions"\n', encoding="utf-8")
+        role.write_text('name = "sr_invalid"\ndescription = "Missing required instructions"\n', encoding="utf-8")
         with self.assertRaises(AssertionError):
             self.validator.validate(self.source)
 
