@@ -1,4 +1,20 @@
-# Startup Team
+# Shaikh Rahman Dev Team
+
+A portfolio project by **Shaikh Rahman**, software developer and data scientist.
+
+A reusable agentic delivery toolkit for software, data engineering, analytics and ML projects. I designed the startup-style workflow around specialist roles, independent producer-critic reviews, and evidence-based delivery, and built the implementation with Codex.
+
+## What this project demonstrates
+
+- Task decomposition and coordination across CTO, product, architecture, development, ML and QA roles.
+- Independent reviews using fresh agent contexts and neutral review packets.
+- A Python/SQLite ledger with persistent limits, dependency tracking, stale-result rejection and recovery.
+- Reviewed, scoped lessons that can transfer between projects without copying private runtime data.
+- Automated tests and documented live-agent demonstrations, including detection of an ML evaluation leak.
+
+For software engineering or data science opportunities, connect through [my GitHub profile](https://github.com/smrahman0009).
+
+The repository is named `shaikh-rahman-dev-team`; the installed Codex skill is invoked as `$startup-team`.
 
 A reusable Codex workflow: CEO intent → CTO routing → appropriately scoped specialists → independent critics → verified delivery. Supports application, data engineering, analytics and ML work.
 
